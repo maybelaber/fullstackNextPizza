@@ -3,12 +3,9 @@ import { OrderSuccessTemplate } from '@/shared/components'
 import { handlePaymentStatus, sendEmail } from '@/shared/lib'
 import { CartItemDTO } from '@/shared/services/dto/cart.dto'
 import { OrderStatus } from '@prisma/client'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function POST(
-	req: NextResponse,
-	params: { params: { id: string } }
-) {
+export async function POST(req: NextRequest) {
 	try {
 		const paramsText = await req.text()
 		let [signature, data] = decodeURIComponent(paramsText).split('&')

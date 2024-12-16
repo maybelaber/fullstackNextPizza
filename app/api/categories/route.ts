@@ -5,9 +5,9 @@ const DEFAULT_MIN_PRICE = 0
 const DEFAULT_MAX_PRICE = 1000
 
 export async function GET(req: NextRequest) {
-	try {
-		const params = req.nextUrl.searchParams
+	const params = req.nextUrl.searchParams
 
+	try {
 		const sizes = params.get('sizes')?.split(',').map(Number)
 		const pizzaTypes = params.get('pizzaTypes')?.split(',').map(Number)
 		const ingredientsIdArr = params.get('ingredients')?.split(',').map(Number)

@@ -2,9 +2,9 @@ import { prisma } from '@/prisma/prisma-client'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest) {
-	try {
-		const code = req.nextUrl.searchParams.get('code')
+	const code = req.nextUrl.searchParams.get('code')
 
+	try {
 		if (!code) {
 			return NextResponse.json({ error: 'Code is required' }, { status: 400 })
 		}
@@ -37,5 +37,9 @@ export async function GET(req: NextRequest) {
 		return NextResponse.redirect(new URL('/?verified', req.url))
 	} catch (error) {
 		console.log('Error [Verify] GET', error)
+		return NextResponse.json(
+			{ message: '[Verify_GET] Server error' },
+			{ status: 500 }
+		)
 	}
 }

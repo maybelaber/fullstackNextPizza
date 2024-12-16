@@ -1,3 +1,5 @@
+'use client'
+
 import { Button, FormInput, Title } from '@/shared/components'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { signIn } from 'next-auth/react'

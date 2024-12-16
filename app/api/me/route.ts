@@ -3,9 +3,9 @@ import { getUserSession } from '@/shared/lib/get-user-session'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-	try {
-		const user = await getUserSession()
+	const user = await getUserSession()
 
+	try {
 		if (!user) {
 			return NextResponse.json({ message: 'Unauthorized' }, { status: 401 })
 		}

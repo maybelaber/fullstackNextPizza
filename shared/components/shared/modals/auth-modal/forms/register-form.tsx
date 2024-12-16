@@ -1,3 +1,5 @@
+'use client'
+
 import { registerUser } from '@/app/actions'
 import { Button, FormInput } from '@/shared/components'
 import { zodResolver } from '@hookform/resolvers/zod'
