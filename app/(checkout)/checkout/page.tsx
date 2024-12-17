@@ -36,8 +36,15 @@ export default function CheckoutPage() {
 
 	const router = useRouter()
 
-	const { totalAmount, items, updateItemQuantity, removeCartItem, loading } =
-		useCartStore()
+	const {
+		totalAmountWithFees,
+		totalAmount,
+		vatPrice,
+		items,
+		updateItemQuantity,
+		removeCartItem,
+		loading,
+	} = useCartStore()
 
 	const {
 		setPaymentData,
@@ -170,6 +177,8 @@ export default function CheckoutPage() {
 
 								<div className='w-[450px]'>
 									<CheckoutSidebar
+										vatPrice={vatPrice}
+										totalAmountWithFees={totalAmountWithFees}
 										totalAmount={totalAmount}
 										loading={loading || submitting}
 									/>

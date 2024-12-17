@@ -5,6 +5,7 @@ import { PayOrderTemplate, VerificationUserTemplate } from '@/shared/components'
 import { CheckoutFormValues } from '@/shared/constants'
 import { createPayment, sendEmail } from '@/shared/lib'
 import { EnumCurrency } from '@/shared/lib/dto/liqpay.dto'
+import { DELIVERY_PRICE, VAT } from '@/shared/lib/get-cart-details'
 import { getCartFromCookies } from '@/shared/lib/get-cart-from-cookies'
 import { getUserSession } from '@/shared/lib/get-user-session'
 import { OrderStatus, Prisma } from '@prisma/client'
@@ -81,13 +82,16 @@ export async function prepareCreatingOrder(data: CheckoutFormValues) {
 			},
 		})
 
+		const vatPrice = (order.totalAmount * VAT) / 100
+		const totalAmountWithFees = order.totalAmount + DELIVERY_PRICE + vatPrice
+
 		const cookieStore = cookies()
 		cookieStore.set('orderId', order.id.toString())
 
 		const { data: paymentData, signature: paymentSignature } = createPayment({
 			price: order.totalAmount,
 			currency: EnumCurrency.UAH,
-			description: `Заказ #${order.id} на суму ${order.totalAmount} грн`,
+			description: `Заказ #${order.id} на суму ${totalAmountWithFees} грн`,
 			orderId: order.id.toString(),
 		})
 

@@ -7,7 +7,9 @@ import { CreateCartItemValues } from '../services/dto/cart.dto'
 export interface CartState {
 	loading: boolean
 	error: boolean
+	totalAmountWithFees: number
 	totalAmount: number
+	vatPrice: number
 	items: CartStateItem[]
 
 	setItems: (items: CartStateItem[]) => void
@@ -29,7 +31,9 @@ export const useCartStore = create<CartState>(set => ({
 	items: [],
 	error: false,
 	loading: true,
+	totalAmountWithFees: 0,
 	totalAmount: 0,
+	vatPrice: 0,
 
 	setItems(items: CartStateItem[]) {
 		set({ items })

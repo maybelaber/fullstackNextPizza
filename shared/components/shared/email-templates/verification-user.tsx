@@ -13,7 +13,7 @@ export const VerificationUserTemplate: React.FC<Readonly<IProps>> = ({
 		</p>
 
 		<p>
-			<a href={`http://localhost:3000/api/auth/verify?code=${code}`}>
+			<a href={`${process.env.SERVER_URL}/api/auth/verify?code=${code}`}>
 				Подтвердить регистрацию
 			</a>
 		</p>

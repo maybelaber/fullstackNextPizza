@@ -5,7 +5,7 @@ interface IProps {
 	className?: string
 }
 
-export const CategoriesError: React.FC<IProps> = ({ className }) => {
+export const ErrorComponent: React.FC<IProps> = ({ className }) => {
 	return (
 		<div className={cn(className, 'text-3xl font-bold')}>
 			<p className='text-center mb-3'>🙁</p>

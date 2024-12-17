@@ -1,3 +1,4 @@
+import { DELIVERY_PRICE } from '@/shared/lib/get-cart-details'
 import { cn } from '@/shared/lib/utils'
 import { ArrowRight, Package, Percent, Truck } from 'lucide-react'
 import React from 'react'
@@ -7,20 +8,18 @@ import { Button, Skeleton } from '../ui'
 interface IProps {
 	className?: string
 	loading?: boolean
+	totalAmountWithFees: number
 	totalAmount: number
+	vatPrice: number
 }
 
-const VAT = 15
-const DELIVERY_PRICE = 250
-
 export const CheckoutSidebar: React.FC<IProps> = ({
+	totalAmountWithFees,
 	totalAmount,
+	vatPrice,
 	loading,
 	className,
 }) => {
-	const vatPrice = (totalAmount * VAT) / 100
-	const totalPrice = totalAmount + DELIVERY_PRICE + vatPrice
-
 	return (
 		<WhiteBlock className={cn(className, 'p-6 sticky top-4')}>
 			<div className='flex flex-col gap-1'>
@@ -29,7 +28,7 @@ export const CheckoutSidebar: React.FC<IProps> = ({
 					<Skeleton className='w-[160px] h-[43px]' />
 				) : (
 					<span className='h-11 text-[34px] font-extrabold'>
-						{totalPrice} ₽
+						{totalAmountWithFees} ₽
 					</span>
 				)}
 			</div>

@@ -3,8 +3,13 @@
 import { CategoryWithRelations } from '@/@types/prisma'
 import { cn } from '@/shared/lib/utils'
 import React, { Suspense } from 'react'
-import { CategoriesSkeleton, Container, Filters, ProductsGroupList } from '.'
-import { CategoriesError } from './categories-error'
+import {
+	CategoriesSkeleton,
+	Container,
+	ErrorComponent,
+	Filters,
+	ProductsGroupList,
+} from '.'
 
 interface IProps {
 	className?: string
@@ -29,7 +34,7 @@ export const ProductsBlock: React.FC<IProps> = ({
 				</div>
 
 				{error ? (
-					<CategoriesError className='flex-1' />
+					<ErrorComponent className='flex-1' />
 				) : (
 					<div className='flex-1'>
 						{loading ? (

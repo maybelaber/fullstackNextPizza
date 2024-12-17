@@ -1,4 +1,5 @@
 import { calcCartItemTotalPrice } from '@/shared/lib'
+import { DELIVERY_PRICE, VAT } from '@/shared/lib/get-cart-details'
 import { cn } from '@/shared/lib/utils'
 import { CartItemDTO } from '@/shared/services/dto/cart.dto'
 import { Order } from '@prisma/client'
@@ -28,6 +29,9 @@ export const OrderItem: React.FC<IProps> = ({ className, order }) => {
 		hour: 'numeric',
 		minute: 'numeric',
 	})
+
+	const vatPrice = (order.totalAmount * VAT) / 100
+	const totalAmountWithFees = order.totalAmount + DELIVERY_PRICE + vatPrice
 
 	return (
 		<AccordionItem
@@ -79,8 +83,19 @@ export const OrderItem: React.FC<IProps> = ({ className, order }) => {
 					</div>
 				))}
 
+				<div className='font-semibold text-xl py-5 border-b flex justify-end'>
+					<div>
+						<div>
+							+ налоги <span className='font-bold'>{vatPrice} ₽</span>
+						</div>
+						<div>
+							+ доставка <span className='font-bold'>{DELIVERY_PRICE} ₽</span>
+						</div>
+					</div>
+				</div>
+
 				<div className='font-semibold text-xl mt-5'>
-					Итого: <span className='font-bold'>{order.totalAmount} ₽</span>
+					Итого: <span className='font-bold'>{totalAmountWithFees} ₽</span>
 				</div>
 			</AccordionContent>
 		</AccordionItem>
