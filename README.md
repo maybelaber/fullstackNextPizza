@@ -40,7 +40,7 @@ Next Pizza is a modern FullStack online store inspired by the Dodo Pizza chain. 
 
 ### Payment System
 
-- **Yookassa Integration:** Transaction processing
+- **LiqPay Integration:** Transaction processing
 - **Webhooks:** Real-time order status updates
 
 ---
